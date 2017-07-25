@@ -96,4 +96,3 @@ ENV/
 .ropeproject
 
 app.db
-/migrations
