@@ -1,0 +1,26 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <p>Hello {{ player.person }}</p>
+            <p>Pick the date(s) when you're free and click submit</p>
+        </div>
+    </div>
+ <form action="" method="post">
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+            <tr>
+                {% for _ in range(0,7) %}
+                <td class="col-xs-1">{{ (today + timedelta(days=_)).strftime('%A %d %B') }}<br>
+                    <input type="checkbox" name="chosen_day" value="{{ (today + timedelta(days=_)) }}"></td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+    
+    </div>
+ </form>
+{% endblock %}

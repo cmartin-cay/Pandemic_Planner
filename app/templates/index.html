@@ -1,0 +1,29 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <p>Here's a look at the next 7 days:</p>
+            <p class="text-success">Green means everyone is available.</p>
+            <p class="text-warning"> Yellow means 3 people are available.</p>
+            <p class="text-danger"> Red means 2 or fewer people are available</p>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+            <tr>
+                {% for _ in range(0,7) %}
+                    {% set people =  Day.num_people(today + timedelta(days=_))%}
+                    {% if people <= 2 %} {% set cond = "danger" %}
+                    {% elif people ==3 %} {% set cond = 'warning' %}
+                    {% else %} {% set cond = 'success' %}
+                    {% endif %}
+                <td class="col-xs-1 {{ cond }}">{{ (today + timedelta(days=_)).strftime('%A %d %B') }}
+                    <p>{{ people }}</p></td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
